@@ -9,6 +9,7 @@ import Page4 from './views/nav2/Page4.vue'
 import Page5 from './views/nav2/Page5.vue'
 import Page6 from './views/nav3/Page6.vue'
 import echarts from './views/charts/echarts.vue'
+import Users from './views/users/users.vue'
 
 let routes = [
     {
@@ -24,6 +25,15 @@ let routes = [
         hidden: true
     },
     //{ path: '/main', component: Main },
+    {
+        path: '/',
+        component: Home,
+        name: '用户管理',
+        iconCls: "el-icon-message",
+        children: [
+            { path: '/users', component: Users, name: '用户列表' }
+        ]
+    },
     {
         path: '/',
         component: Home,
