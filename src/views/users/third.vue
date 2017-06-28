@@ -22,11 +22,7 @@
             </el-table-column>
             <el-table-column type="index" width="60">
             </el-table-column>
-            <el-table-column prop="username" label="账号" sortable>
-            </el-table-column>
-            <el-table-column prop="nickname" label="昵称" sortable>
-            </el-table-column>
-            <el-table-column prop="nickname" label="用户组" sortable>
+            <el-table-column prop="nickname" label="姓名" sortable>
             </el-table-column>
             <el-table-column prop="gender" label="性别" :formatter="formatSex" sortable>
             </el-table-column>

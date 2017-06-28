@@ -16,21 +16,17 @@
         </el-col>
 
         <!--列表-->
-        <el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange"
+        <el-table :data="groups" highlight-current-row v-loading="listLoading" @selection-change="selsChange"
                   style="width: 100%;">
             <el-table-column type="selection" width="55">
             </el-table-column>
             <el-table-column type="index" width="60">
             </el-table-column>
-            <el-table-column prop="username" label="账号" sortable>
+            <el-table-column prop="name_plural" label="用户组" sortable>
             </el-table-column>
-            <el-table-column prop="nickname" label="昵称" sortable>
+            <el-table-column prop="gender" label="用户组权限" :formatter="formatSex" sortable>
             </el-table-column>
-            <el-table-column prop="nickname" label="用户组" sortable>
-            </el-table-column>
-            <el-table-column prop="gender" label="性别" :formatter="formatSex" sortable>
-            </el-table-column>
-            <el-table-column prop="birthday" label="生日" sortable>
+            <el-table-column prop="birthday" label="用户人数" sortable>
             </el-table-column>
             <el-table-column prop="age" label="状态" sortable>
             </el-table-column>
@@ -105,7 +101,7 @@
 <script>
 	import util from '../../common/js/util'
 	//import NProgress from 'nprogress'
-	import { getUsers, addUser, editUser } from '../../api/api';
+	import { getGroups } from '../../api/api';
 
 	export default {
 		data() {
@@ -113,7 +109,7 @@
 				filters: {
 					name: ''
 				},
-				users: [],
+				groups: [],
 				total: 0,
 				page: 1,
 				listLoading: false,
@@ -152,27 +148,24 @@
 		},
 		methods: {
 			//性别显示转换
-			formatSex: function (row, column) {
-				return row.gender == 1 ? '男' : row.gender == 0 ? '女' : '未知';
-			},
 			handleCurrentChange(val) {
 				this.page = val;
-				this.getUsers();
+				this.getGroups();
 			},
 			selsChange: function (sels) {
 				this.sels = sels;
 			},
 			//获取用户列表
-			getUsers() {
+			getGroups() {
 				let params = {
 					page: this.page,
 					name: this.filters.name
 				};
 				this.listLoading = true;
 				//NProgress.start();
-				getUsers().then((res) => {
+				getGroups().then((res) => {
 					this.total = res.total;
-					this.users = res.data;
+					this.groups = res.data;
 					this.offset = res.offset;
 					this.limit = res.limit;
 					this.listLoading = false;
@@ -292,7 +285,7 @@
 			}
 		},
 		mounted() {
-			this.getUsers();
+			this.getGroups();
 		}
 	}
 

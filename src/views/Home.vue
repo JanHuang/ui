@@ -75,7 +75,7 @@
 	export default {
 		data() {
 			return {
-				sysName:'VUEADMIN',
+				sysName:'FastDLabs',
 				collapsed:false,
 				sysUserName: '',
 				sysUserAvatar: '',

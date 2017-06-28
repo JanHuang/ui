@@ -7,7 +7,7 @@
                     <el-input v-model="filters.name" placeholder="姓名"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary" v-on:click="getUsers">查询</el-button>
+                    <el-button type="primary" v-on:click="getDiscussions">查询</el-button>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="handleAdd">新增</el-button>
@@ -16,7 +16,7 @@
         </el-col>
 
         <!--列表-->
-        <el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange"
+        <el-table :data="posts" highlight-current-row v-loading="listLoading" @selection-change="selsChange"
                   style="width: 100%;">
             <el-table-column type="selection" width="55">
             </el-table-column>
@@ -105,7 +105,7 @@
 <script>
 	import util from '../../common/js/util'
 	//import NProgress from 'nprogress'
-	import { getUsers, addUser, editUser } from '../../api/api';
+	import { getDiscussions } from '../../api/api';
 
 	export default {
 		data() {
@@ -113,7 +113,7 @@
 				filters: {
 					name: ''
 				},
-				users: [],
+				posts: [],
 				total: 0,
 				page: 1,
 				listLoading: false,
@@ -157,22 +157,22 @@
 			},
 			handleCurrentChange(val) {
 				this.page = val;
-				this.getUsers();
+				this.getDiscussions();
 			},
 			selsChange: function (sels) {
 				this.sels = sels;
 			},
 			//获取用户列表
-			getUsers() {
+			getDiscussions() {
 				let params = {
 					page: this.page,
 					name: this.filters.name
 				};
 				this.listLoading = true;
 				//NProgress.start();
-				getUsers().then((res) => {
+				getDiscussions().then((res) => {
 					this.total = res.total;
-					this.users = res.data;
+					this.posts = res.data;
 					this.offset = res.offset;
 					this.limit = res.limit;
 					this.listLoading = false;
@@ -194,7 +194,7 @@
 							message: '删除成功',
 							type: 'success'
 						});
-						this.getUsers();
+						this.getDiscussions();
 					});
 				}).catch(() => {
 
@@ -232,7 +232,7 @@
 								});
 								this.$refs['editForm'].resetFields();
 								this.editFormVisible = false;
-								this.getUsers();
+								this.getDiscussionsgetDiscussions();
 							});
 						});
 					}
@@ -256,7 +256,7 @@
 								});
 								this.$refs['addForm'].resetFields();
 								this.addFormVisible = false;
-								this.getUsers();
+								this.getDiscussions();
 							});
 						}).catch(() => {
 						    this.$message({
@@ -284,7 +284,7 @@
 							message: '删除成功',
 							type: 'success'
 						});
-						this.getUsers();
+						this.getDiscussions();
 					});
 				}).catch(() => {
 
@@ -292,7 +292,7 @@
 			}
 		},
 		mounted() {
-			this.getUsers();
+			this.getDiscussions();
 		}
 	}
 
