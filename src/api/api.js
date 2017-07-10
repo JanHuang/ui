@@ -42,3 +42,13 @@ export const getTags = (params) => {
 export const getDiscussions = (params) => {
     return axios.get(`${base}/api/discussions`, qs.stringify(params)).then(res => res.data);
 };
+export const replies = (id, params) => {
+    return axios.post(`${base}/api/discussions/${id}/reply`, qs.stringify(params)).then(res => res.data);
+};
+export const reply = (id, params) => {
+    return axios.post(`${base}/api/discussions`, qs.stringify({
+        reply_id: id,
+        content: params.content,
+        title: params.title,
+    })).then(res => res.data);
+};

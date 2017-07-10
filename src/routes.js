@@ -8,6 +8,7 @@ import Third from './views/users/third.vue'
 import Posts from './views/posts/posts.vue'
 import Tags from './views/tags/tags.vue'
 import Discussions from './views/discussions/discussions.vue'
+import Replies from './views/discussions/replies.vue'
 
 let routes = [
     {
@@ -68,6 +69,7 @@ let routes = [
         iconCls: 'el-icon-message',//图标样式class
         children: [
             { path: '/discussions', component: Discussions, name: '评论列表' },
+            { path: '/replies', component: Replies, name: '评论列表', hidden: true },
         ]
     },
     {

@@ -22,7 +22,7 @@
             </el-table-column>
             <el-table-column type="index" width="60">
             </el-table-column>
-            <el-table-column prop="title" @click="replies(scope.$index, scope.row)" label="主题" sortable>
+            <el-table-column prop="title" label="主题" sortable>
             </el-table-column>
             <el-table-column prop="user_id" label="用户" sortable>
             </el-table-column>
